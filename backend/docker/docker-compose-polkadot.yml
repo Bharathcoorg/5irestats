@@ -3,11 +3,11 @@ version: '3.7'
 services:
   
   postgres:
-    image: postgres:14
+    image: postgres:15
     restart: always
     shm_size: 1gb
     volumes:
-      - 'db-data:/var/lib/postgresql/data'
+      - ./postgres-data:/var/lib/postgresql/data
       - '../sql/backend.sql:/docker-entrypoint-initdb.d/backend.sql'
     environment:
       POSTGRES_USER: 'polkastats'
@@ -35,9 +35,9 @@ services:
       - "-c"
       - "max_connections=200"
       - "-c"
-      - "shared_buffers=32GB"
+      - "shared_buffers=4GB"
       - "-c"
-      - "effective_cache_size=96GB"
+      - "effective_cache_size=6GB"
       - "-c"
       - "maintenance_work_mem=2GB"
       - "-c"
